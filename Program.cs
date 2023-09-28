@@ -73,7 +73,7 @@ namespace oop4_coordinate
                 }
 
                 // Відображення результату у resultLabel
-                resultLabel.Text = $"Точка ({x}, {y}) знаходиться {quadrant} чверті.";
+                resultLabel.Text = $"Точка ({x}; {y}) знаходиться {quadrant} чверті.";
 
                 // Візуальне відображення системи координат та точки з визначеним кольором
                 DrawCoordinateSystem(x, y, pointColor);
