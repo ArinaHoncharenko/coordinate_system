@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,15 +9,16 @@ namespace oop4_coordinate
         [STAThread]
         static void Main()
         {
+            // Ініціалізуємо Windows Forms додаток
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            // Запускаємо форму Form1
             Application.Run(new Form1());
         }
     }
 
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -71,7 +72,7 @@ namespace oop4_coordinate
                     pointColor = Color.Black;
                 }
 
-                // Відображення результату
+                // Відображення результату у resultLabel
                 resultLabel.Text = $"Точка ({x}, {y}) знаходиться {quadrant} чверті.";
 
                 // Візуальне відображення системи координат та точки з визначеним кольором
@@ -79,24 +80,27 @@ namespace oop4_coordinate
             }
             catch (FormatException)
             {
-                MessageBox.Show("Некоректні вхідні дані. Будь ласка, введіть числа для координат x та y.");
+                // Обробка помилки при некоректних вхідних даних
+                resultLabel.Text = "Некоректні вхідні дані. Будь ласка, введіть числа для координат x та y.";
             }
         }
 
         private void DrawCoordinateSystem(double x, double y, Color pointColor)
         {
+            // Створюємо графічний об'єкт для малювання на PictureBox "pictureBox1"
             Graphics g = pictureBox1.CreateGraphics();
             int centerX = pictureBox1.Width / 2;
             int centerY = pictureBox1.Height / 2;
 
-            // Малювання осей координат
+            // Малюємо осі координат
             g.DrawLine(Pens.Black, centerX, 0, centerX, pictureBox1.Height); // Вертикальна вісь
             g.DrawLine(Pens.Black, 0, centerY, pictureBox1.Width, centerY); // Горизонтальна вісь
-            // Масштабування координат, щоб відобразити точку в системі координат
-            int pointX = centerX + (int)(x * 10); // Масштаб 1:10
-            int pointY = centerY - (int)(y *10); // Масштаб 1:10
 
-            // Малювання точки з визначеним кольором
+            // Масштабуємо координати, щоб відобразити точку в системі координат
+            int pointX = centerX + (int)(x * 10); // Масштаб 1:10
+            int pointY = centerY - (int)(y * 10); // Масштаб 1:10
+
+            // Малюємо точку з визначеним кольором
             using (Brush brush = new SolidBrush(pointColor))
             {
                 g.FillEllipse(brush, pointX - 2, pointY - 2, 5, 5);
